@@ -81,6 +81,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return function (action) {
 	            if (action instanceof Promise) {
 	              queue.push(action);
+	              action.catch(function (reason) {
+	                debugger;
+	                throw reason; // re-throw uncaught promise exceptions to be visible
+	                // by other parts of the stack
+	              });
 	              return action;
 	            }
 
